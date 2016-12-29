@@ -5,7 +5,7 @@
 DRYRUN="0"       # set to "0" to actually run the script
                  # otherwise it will only show what would 
                  # be done
-CLIENTONLY="1"   # if '1' then host configuration is left 
+CLIENTONLY="0"   # if '1' then host configuration is left 
                  # untouched: only the client root and ram image
                  # will be generated
 
@@ -151,6 +151,12 @@ dracut -f initramfs-nfs.img
 $DBGCMD cp -f initramfs-nfs.img /var/lib/tftpboot/
 $DBGCMD chmod 644 /var/lib/tftpboot/initramfs-nfs.img
 cd ${SETUPDIR}
+
+
+echo ====
+echo 'Create link /data/home -> /home'
+mkdir -p /data
+ln -s /home /data/home
 
 echo ====
 echo All done.
