@@ -98,6 +98,11 @@ cd ${SETUPDIR}
 mkdir -p ${CNDIR}/cnimage/stateless/writable
 mkdir -p ${CNDIR}/cnimage/stateless/state
 mkdir -p ${CNDIR}/cnimage/run/rpcbind
+mkdir -p ${CNDIR}/cnimage/data/home
+cd ${CNDIR}/cnimage
+rmdir home
+ln -s data/home home
+cd ${SETUPDIR}
 
 # client mtab needs to be written and locked but
 # /etc/mtab is on read-only fs -> circumvent by
@@ -154,9 +159,9 @@ cd ${SETUPDIR}
 
 
 echo ====
-echo 'Create link /data/home -> /home'
-mkdir -p /data
-ln -s /home /data/home
+echo 'Home dirs are exported as /data/home, make sure this exists!'
+echo ====
+echo 
 
 echo ====
 echo All done.
