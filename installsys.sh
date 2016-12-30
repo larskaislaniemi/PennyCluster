@@ -102,6 +102,9 @@ cat ${CNDIR}/cnimage/etc/shadow | sed -re "s@root:\*:@root:"$PW":@" > /tmp/cnset
 $DBGCMD cp -f /tmp/cnsetup_tmp02 ${CNDIR}/cnimage/etc/shadow
 $DBGCMD rm -f /tmp/cnsetup_tmp02
 
+echo ====
+echo 'Disable unneeded services on client machine'
+$DBGCMF chroot ${CNDIR}/cnimage systemctl disable postfix
 
 if [ "$CLIENTONLY" -eq "0" ]; 
 then
