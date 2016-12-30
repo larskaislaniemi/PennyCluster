@@ -2,10 +2,10 @@
 
 ## Variables ###
 
-DRYRUN="1"       # set to "0" to actually run the script
+DRYRUN="0"       # set to "0" to actually run the script
                  # otherwise it will only show what would 
                  # be done
-CLIENTONLY="0"   # if '1' then host configuration is left 
+CLIENTONLY="1"   # if '1' then host configuration is left 
                  # untouched: only the client root and ram image
                  # will be generated
 
@@ -17,6 +17,13 @@ echo "  (Unless you are sure you are running the latest kernel...)"
 echo "= Make sure you have configured the network"
 echo "= Make sure you have modified all the configuration files"
 echo "Press Enter to continue or Ctrl-C to abort."
+echo ""
+echo ""
+echo Running with options:
+echo   DRYRUN=$DRYRUN
+echo   CLIENTONLY=$CLIENTONLY
+echo ""
+echo ""
 read DUMMY
 
 KERNELVER=`uname -r`
@@ -72,7 +79,9 @@ fi
 $DBGCMD mkdir -p ${CNDIR}/cnimage
 $DBGCMD mkdir -p ${CNDIR}/state
 
-$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload packages install "Minimal Install"
+$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install base core
+$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install scientific 
+$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install hardware-monitoring infiniband network-file-system-client performance remote-system-management
 $DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload install kernel nfs-utils
 
 echo ====
