@@ -1,0 +1,5 @@
+default linux
+
+label linux
+	kernel vmlinuz
+	append initrd=initramfs-nfs.img
