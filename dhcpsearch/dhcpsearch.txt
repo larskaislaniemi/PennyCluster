@@ -1,0 +1,54 @@
+DHCP configurations reside in /etc/dhcp/dhcpd.hosts.conf that
+is included by dhcpd.conf itself.
+
+Scripts here will help to generate dhcpd.hosts.conf.
+Remember to always restart dhcpd after modifying
+the configuration files.
+
+Case 1: Clean config
+====================
+
+Boot up nodes and let them query for DHCP address. The
+queries will be logged in syslog and can be searched by
+
+	./dhcplog2db.sh > hosts.db
+
+hosts.db will now have one line per each node asking
+for an IP. Modify the file (change IP address and host 
+name), after which you can generate the dhcpd.hosts.conf:
+
+	./db2dhcpconf.sh hosts.db > /etc/dhcp/dhcpd.hosts.conf 
+
+
+Case 2: New hosts + Existing hosts in DHCP config
+=================================================
+
+Create a new db that includes also the old entries
+from DHCP configuration, by
+
+	./dhcplog2db.sh > hosts.db
+
+Again, modify hosts.db and run
+	
+	./db2dhcpconf.sh hosts.db > /etc/dhcp/dhcpd.hosts.conf 
+
+Case 3: New hosts + existing DB + existing DHCP config
+======================================================
+
+If you already have entries in hosts.db that you want
+to keep, bu also want to look for new machines, call
+the lookup with the existing db as an argument:
+
+	./dhcplog2db.sh hosts.db > hosts.new.db
+
+(do not overwrite the old db at this point). Now you
+can again modify the hosts.new.db and then run
+
+	./db2dhcpconf.sh hosts.new.db > /etc/dhcp/dhcpd.hosts.conf 
+
+
+Manually editing dhcpd.hosts.conf
+=================================
+
+Keep each host definition on one line.
+
