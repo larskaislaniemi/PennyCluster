@@ -114,7 +114,7 @@ then
 	echo Starting and enabling host services ...
 	$DBGCMD systemctl enable dhcpd
 	$DBGCMD systemctl start dhcpd
-	$DBGCMD firewall-cmd --add-service=dhcpd --permanent
+	$DBGCMD firewall-cmd --add-service=dhcp --permanent
 
 	$DBGCMD systemctl enable xinetd
 	$DBGCMD systemctl start xinetd
