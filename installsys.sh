@@ -43,6 +43,7 @@ then
 	$DBGCMD mkdir -p /var/lib/tftpboot/pxelinux.cfg
 	$DBGCMD cp -f /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
 	$DBGCMD cp -f /boot/vmlinuz-${KERNELVER} /var/lib/tftpboot/vmlinuz || (echo "ERROR: vmlinuz copy failed!" && exit 1)
+	$DBGCMD chmod 644 /var/lib/tftpboot/vmlinuz
 
 	BAKDIR=${SETUPDIR}/hostfiles_backup_`date +%F_%N`
 	$DBGCMD mkdir -p ${BAKDIR}
@@ -135,6 +136,7 @@ echo Creating initramfs ...
 cd ${CNDIR}
 dracut -f initramfs-nfs.img
 $DBGCMD cp -f initramfs-nfs.img /var/lib/tftpboot/
+$DBGCMD chmod 644 /var/lib/tftpboot/initramfs-nfs.img
 cd ${SETUPDIR}
 
 echo ====
