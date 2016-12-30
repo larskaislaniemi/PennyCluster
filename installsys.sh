@@ -23,6 +23,8 @@ KERNELVER=`uname -r`
 SETUPDIR=`pwd`
 CNDIR="/srv/cndata"   # just a convenience; to change, modify also config files!
 
+mkdir -p ${CNDIR}
+
 if [ "$DRYRUN" -eq "0" ];
 then
 	DBGCMD=""
@@ -104,7 +106,7 @@ $DBGCMD rm -f /tmp/cnsetup_tmp02
 
 echo ====
 echo 'Disable unneeded services on client machine'
-$DBGCMF chroot ${CNDIR}/cnimage systemctl disable postfix
+$DBGCMD chroot ${CNDIR}/cnimage systemctl disable postfix
 
 if [ "$CLIENTONLY" -eq "0" ]; 
 then
