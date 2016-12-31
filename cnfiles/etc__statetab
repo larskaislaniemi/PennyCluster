@@ -10,6 +10,7 @@
 #   /etc/ssh
 #   /var/spool/mail
 #
+
 /root
 /etc/ssh
 /var/log

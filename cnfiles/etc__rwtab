@@ -1,28 +1,35 @@
-dirs	/var
-
 empty	/tmp
+#state	/root in statetab
 
+files	/boot
+files	/etc
 files	/run
-files	/lock
-files	/etc/adjtime
-files	/etc/ntp.conf
-files	/etc/resolv.conf
-#files	/etc/lvm/cache
-#files	/etc/lvm/archive
-#files	/etc/lvm/backup
-#files	/var/account
-#files	/var/lib/arpwatch
-#files	/var/lib/NetworkManager
-#files	/var/cache/alchemist
-#files	/var/lib/gdm
-#files	/var/lib/iscsi
-#files	/var/lib/logrotate.status
-#files	/var/lib/ntp
-#files	/var/lib/xen
-#files	/var/empty/sshd
-files   /etc/localtime
-#files	/var/lib/random-seed
-#files	/var/spool
-#files	/var/lib/samba
-#files   /var/log/audit/audit.log
-#files	/var/lib/nfs
+
+files	/var/account
+files	/var/adm
+files	/var/cache
+files	/var/crash
+files	/var/db
+files	/var/lib
+files	/var/local
+files	/var/lock
+#state	/var/log in statetab
+files	/var/mail
+files	/var/run
+files	/var/spool
+files	/var/.updated
+#skip	/var/yp    static? generated at host?
+#skip	/var/nis   what for?
+files	/var/tmp
+
+#skip	/var/opt   static?
+
+# state /var/cache, /var/db, /var/lib ?
+# nfs /var/mail ?
+
+#state	/etc/ssh in statetab
+#state	/etc/sysconfig in statetab
+
+# nfs home
+# nfs opt
+# nfs srv

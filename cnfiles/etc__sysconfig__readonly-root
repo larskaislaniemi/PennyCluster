@@ -6,7 +6,7 @@ READONLY=yes
 TEMPORARY_STATE=yes
 
 # Place to put a tmpfs for temporary scratch writable space
-RW_MOUNT=/var/lib/stateless/writable
+RW_MOUNT=/stateless/writable
 
 # Label on local filesystem which can be used for temporary scratch space
 RW_LABEL=stateless-rw

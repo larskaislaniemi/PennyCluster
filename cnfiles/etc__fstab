@@ -2,5 +2,5 @@ none	/tmp		tmpfs	defaults	0 0
 none	/dev/shm	tmpfs	defaults	0 0
 sysfs	/sys		sysfs	defaults	0 0
 proc	/proc		proc	defaults	0 0
-/dev/sda1	/var/lib/stateless/writable	ext4	defaults	0 0
-
+/dev/sda1	/stateless/writable	ext4	defaults	0 0
+192.168.52.254:/home	/home	nfs	defaults	0 0

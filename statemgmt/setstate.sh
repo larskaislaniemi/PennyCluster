@@ -36,6 +36,8 @@ function addhost {
 
 if [ "$1" == "CLEAR" ];
 then
+	echo Removing state files ...
+	echo This might take a while if active NFS locks exist
 	for d in ${CNDIR}/state/*
 	do
 		if [ -d $d ];

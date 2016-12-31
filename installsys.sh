@@ -43,7 +43,7 @@ if [ "$CLIENTONLY" -eq "0" ];
 then
 	echo ====
 	echo Installing host packages ...
-	$DBGCMD yum install tftp-server xinetd syslinux dhcp tftp nfs-utils dracut-network dracut-config-generic 
+	$DBGCMD yum -y install tftp-server xinetd syslinux dhcp tftp nfs-utils dracut-network dracut-config-generic 
 
 	echo ====
 	echo Copying host configuration files ...
@@ -79,10 +79,10 @@ fi
 $DBGCMD mkdir -p ${CNDIR}/cnimage
 $DBGCMD mkdir -p ${CNDIR}/state
 
-$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install base core
-$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install scientific 
-$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install hardware-monitoring infiniband network-file-system-client performance remote-system-management
-$DBGCMD yum --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload install kernel nfs-utils
+$DBGCMD yum -y --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install base core
+$DBGCMD yum -y --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install scientific 
+$DBGCMD yum -y --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload group install hardware-monitoring infiniband network-file-system-client performance remote-system-management
+$DBGCMD yum -y --installroot=${CNDIR}/cnimage --releasever=7 --downloaddir=/tmp/yumdownload install kernel nfs-utils
 
 echo ====
 echo Copying client configuration files
@@ -94,6 +94,10 @@ do
 	$DBGCMD cp $f ${CNDIR}/cnimage/$newfile
 done
 cd ${SETUPDIR}
+
+mkdir -p ${CNDIR}/cnimage/stateless/writable
+mkdir -p ${CNDIR}/cnimage/stateless/state
+mkdir -p ${CNDIR}/cnimage/run/rpcbind
 
 # client mtab needs to be written and locked but
 # /etc/mtab is on read-only fs -> circumvent by
